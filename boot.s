@@ -1,6 +1,5 @@
 
 BOOTSEG = 0x7C00
-VIDSEG = 0xB800
 
 # The CPU starts in Realmode (that is 16 bit word sizes).
 # tell the assembler that we are writing 16 bit code.
