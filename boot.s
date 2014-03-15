@@ -5,7 +5,7 @@ BOOTSEG = 0x7C00
 # tell the assembler that we are writing 16 bit code.
 .code16
 .section .text
-.globl _start
+	.globl _start
 
 _start:
 	# BIOS loads this bootsector code at address 0x7C00 in RAM.
@@ -44,7 +44,8 @@ _prexit:
 
 msg1:	.ascii "Welcome to penix.\r\n\0"
 
-# At offset 510. write MBR magic number.
-.org 510
-	.byte 0x55
-	.byte 0xAA
+
+_bootflag:
+	# Write MBR magic number at byte 510 and 511.
+	.org 	510
+	.word 	0xAA55
