@@ -1,5 +1,11 @@
 
-BOOTSEG = 0x7C00
+# BIOS loads this bootsector code at address 0x7C00 in RAM
+# This contant will be loaded into the DS (Data segment) register.
+#
+# each segment contains 16 adresses so the value stored in the segment
+# register will be multiplied by 16 (0x1) to get the actual address.
+# (0x07C0 * 0x1 = 0x7C00)
+BOOTSEG = 0x07C0
 
 # The CPU starts in Realmode (that is 16 bit word sizes).
 # tell the assembler that we are writing 16 bit code.
@@ -8,13 +14,12 @@ BOOTSEG = 0x7C00
 	.globl _start
 
 _start:
-	# BIOS loads this bootsector code at address 0x7C00 in RAM.
-	# therefor if $msg1 is located at for example 0x20 in the binary.
-	# it is loaded at 0x7C00 + 0x20 in RAM.
-	movw $BOOTSEG, %si
-	addw $(msg1 - _start), %si
+	# Setup segment registers
+	movw $BOOTSEG	, %ax
+	movw %ax	, %ds
 
 	# print $msg1 on the screen.
+	movw $(msg1 - _start), %si
 	call print
 
 hang:	jmp hang
