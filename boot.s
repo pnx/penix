@@ -15,8 +15,8 @@ BOOTSEG = 0x07C0
 
 _start:
 	# Setup segment registers
-	movw $BOOTSEG	, %ax
-	movw %ax	, %ds
+	movw 	$BOOTSEG, %ax
+	movw 	%ax, %ds
 
 	# print $msg1 on the screen.
 	movw $msg1, %si
@@ -27,23 +27,23 @@ hang:	jmp hang
 
 print:
 	# Tell bios to print a character at the cursor.
-	movb $0x0e, %ah
+	movb 	$0x0e, %ah
 
 _prl:
 	# load char from memory to al register.
-	movb (%si), %al
+	movb 	(%si), %al
 
 	# if NULL character, jump out.
-	cmpb $0, %al
-	jz _prexit
+	cmpb 	$0x00, %al
+	jz 	_prexit
 
 	# write to TTY
-	int $0x10
+	int 	$0x10
 
 	# increment the address in si register and jump
 	# to beginning of loop.
-	addw $1, %si
-	jmp _prl
+	addw 	$0x01, %si
+	jmp 	_prl
 _prexit:
 	ret
 
