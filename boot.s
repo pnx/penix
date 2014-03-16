@@ -19,7 +19,7 @@ _start:
 	movw %ax	, %ds
 
 	# print $msg1 on the screen.
-	movw $(msg1 - _start), %si
+	movw $msg1, %si
 	call print
 
 hang:	jmp hang
