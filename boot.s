@@ -19,8 +19,15 @@ _start:
 	movw 	%ax, %ds
 
 	# print $msg1 on the screen.
-	movw $msg1, %si
-	call print
+	movw 	$msg1, %si
+	call 	print
+
+	# Wait for user keypress
+	xorw	%ax, %ax
+	int	$0x16
+
+	# Reboot
+	int	$0x19
 
 hang:	jmp hang
 
@@ -47,7 +54,9 @@ _prl:
 _prexit:
 	ret
 
-msg1:	.ascii "Welcome to penix.\r\n\0"
+msg1:	.ascii 	"Welcome to penix.\r\n"
+	.ascii 	"Press any key to reboot :)\r\n"
+	.byte  	0
 
 
 _bootflag:
