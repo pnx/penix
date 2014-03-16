@@ -2,7 +2,7 @@
 AS = as
 ASFLAGS = --32
 LD = ld 
-LDFLAGS = -m elf_i386
+LDFLAGS = -m elf_i386 -Ttext=0
 
 image.bin : boot.o
 	$(LD) $(LDFLAGS) --oformat=binary -o $@ $^
