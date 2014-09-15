@@ -1,10 +1,10 @@
 
 # BIOS loads this bootsector code at address 0x7C00 in RAM
-# This contant will be loaded into the DS (Data segment) register.
+# This constant will be loaded into the DS (Data segment) register.
 #
-# each segment contains 16 adresses so the value stored in the segment
-# register will be multiplied by 16 (0x1) to get the actual address.
-# (0x07C0 * 0x1 = 0x7C00)
+# Segment registers will be multiplied
+# by 16 (0x10) to get the physical address.
+# (0x07C0 * 0x10 = 0x7C00)
 BOOTSEG = 0x07C0
 
 # The CPU starts in Realmode (that is 16 bit word sizes).
